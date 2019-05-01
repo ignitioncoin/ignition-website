@@ -1,0 +1,57 @@
+<IfModule mod_setenvif.c>
+  SetEnvIf X-Forwarded-Proto "^https$" HTTPS
+</IfModule>
+
+## Handle font issues with browser-sync
+<IfModule mod_headers.c>
+<FilesMatch "\.(eot|font.css|otf|ttc|ttf|woff)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_mime.c>
+# Web fonts
+AddType application/font-woff woff
+AddType application/vnd.ms-fontobject eot
+# Browsers usually ignore the font MIME types and sniff the content,
+# however, Chrome shows a warning if other MIME types are used for the
+# following fonts.
+AddType application/x-font-ttf ttc ttf
+AddType font/opentype otf
+# Make SVGZ fonts work on iPad:
+# https://twitter.com/FontSquirrel/status/14855840545
+AddType     image/svg+xml svg svgz
+AddEncoding gzip svgz
+</IfModule>
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+
+# Disable PHP file loading
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# RewriteRule ^.*\.php$ - [F,L]
+RewriteRule ^.*\.php$ /404.html [R=301,L]
+# RewriteRule ^.*\.php$ / [NC]
+# RewriteRule ^(.*)$ /index.php?path=$1 [NC,L,QSA]
+</IfModule>
+
+ErrorDocument 404 /404.html
+
+Redirect 301 /about-us.html /about-us
+Redirect 301 /faq.html /faq
+Redirect 301 /roadmap.html https://bitcointalk.org/index.php?topic=2612608.0
+Redirect 301 /opportunites.html /opportunities
+Redirect 301 /Ignition-Coin-White-Paper.pdf /wp-content/uploads/2018/05/Ignition-Coin-White-Paper.pdf
+Redirect 301 /whitepaper.html /whitepaper
+Redirect 301 /contact-us.html /contact-us
+Redirect 301 /terms-and-conditions.html /terms-and-conditions
+Redirect 301 /privacy-policy.html /privacy-policy
