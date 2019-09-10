@@ -1,3 +1,8 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ %{HTTP_HOST}$1 [C]
+RewriteRule ^www\.(.*)$ https://$1 [L,R=301]
+
 <IfModule mod_setenvif.c>
   SetEnvIf X-Forwarded-Proto "^https$" HTTPS
 </IfModule>
