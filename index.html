@@ -297,14 +297,14 @@
             <div class="col-6 col-md-3">
                 <div class="count-block">
                     <div class="icon"><i class="fa fa-rocket"></i></div>
-                    <div class="count count-price" data-count="3.72">0</div>
+                    <div class="count count-price" data-count="3.72" id="price">0</div>
                     <div class="label">CURRENT PRICE</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="count-block">
                     <div class="icon"><i class="fa fa-signal"></i></div>
-                    <div class="count count-supply" data-count="578437">0</div>
+                    <div class="count count-supply" data-count="578437" id="supply">0</div>
                     <div class="label">CURRENT SUPPLY</div>
                 </div>
             </div>
@@ -790,10 +790,15 @@
 <script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.5'></script>
 <script>
 fetch("https://chainz.cryptoid.info/ic/api.dws?q=masternodecount", {credentials: "omit"}).then(resp => resp.text()).then(text => {
-  // do anything you want with text
   document.getElementById("mncount").innerHTML = text;
-})
-</script
+});
+fetch("https://chainz.cryptoid.info/ic/api.dws?q=ticker.usd", {credentials: "omit"}).then(resp => resp.text()).then(text => {
+  document.getElementById("price").innerHTML = text;
+});
+fetch("https://chainz.cryptoid.info/ic/api.dws?q=circulating", {credentials: "omit"}).then(resp => resp.text()).then(text => {
+  document.getElementById("supply").innerHTML = text;
+});
+</script>
 <div id="go-back-up"><i class="fa fa-chevron-up"></i></div>
 </body>
 
