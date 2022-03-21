@@ -290,7 +290,7 @@
             <div class="col-6 col-md-3">
                 <div class="count-block">
                     <div class="icon"><i class="far fa-hdd"></i></div>
-                    <div class="count count-masternodes" data-count="65">0</div>
+                    <div class="count count-masternodes" data-count="65" id="mncount">0</div>
                     <div class="label">MASTERNODES ONLINE</div>
                 </div>
             </div>
@@ -788,7 +788,12 @@
 <script type='text/javascript' src='/wp-content/themes/understrap/js/popper.min.js?ver=4.9.5'></script>
 <script type='text/javascript' src='/wp-content/themes/understrap-child/js/child-theme.min.js?ver=0.5.2'></script>
 <script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.5'></script>
-
+<script>
+fetch("https://chainz.cryptoid.info/ic/api.dws?q=masternodecount", {credentials: "omit"}).then(resp => resp.text()).then(text => {
+  // do anything you want with text
+  document.getElementByID("mncount").innerHTML = text;
+})
+</script
 <div id="go-back-up"><i class="fa fa-chevron-up"></i></div>
 </body>
 
