@@ -791,7 +791,7 @@
 <script>
 fetch("https://chainz.cryptoid.info/ic/api.dws?q=masternodecount", {credentials: "omit"}).then(resp => resp.text()).then(text => {
   // do anything you want with text
-  document.getElementByID("mncount").innerHTML = text;
+  document.getElementById("mncount").innerHTML = text;
 })
 </script
 <div id="go-back-up"><i class="fa fa-chevron-up"></i></div>
